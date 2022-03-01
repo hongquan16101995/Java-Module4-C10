@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style th:replace="/layout :: css"></style>
+</head>
+<body>
+<h1><a style="text-decoration: none" type="button" th:href="@{/country/{id}(id=${country.getId()})}"><span style="color: white">List City In Country</span></a></h1>
+<button><a th:href="@{/city/create}">Create new city</a></button><br><br>
+<button><a type="button" th:href="@{/country}">List Country</a></button><br><br>
+
+<table id="tables">
+  <tr>
+    <th>CityName</th>
+    <th>Popular</th>
+    <th>GDP</th>
+    <th>Country</th>
+    <th>Edit</th>
+    <th>Delete</th>
+    <th>View</th>
+  </tr>
+  <tr th:each="c : ${cities}">
+    <td th:text="${c.getCityName()}"></td>
+    <td th:text="${c.getPopular()}"></td>
+    <td th:text="${c.getGdp()}"></td>
+    <td>
+      <a th:text="${c.getCountry().getCountryName()}"
+         th:href="@{/country/city(country_id=${c.getCountry().getId()})}"></a>
+    </td>
+    <td><a th:href="@{/city/edit/{id}(id=${c.getId()})}">Edit</a></td>
+    <td><a th:href="@{/city/delete/{id}(id=${c.getId()})}"
+           onclick="return confirm('Are you sure you want to Delete?')">Delete</a></td>
+    <td><a th:href="@{/city/view/{id}(id=${c.getId()})}">View</a></td>
+  </tr>
+</table>
+<br>
+<div>
+  <a th:href="@{/country/{id}(page=${cities.number - 1}, id=${country.getId()})}"
+     th:if="${cities.hasPrevious()}"><span>Previous</span></a>
+  <span th:text="${cities.number + 1} + '/' + ${cities.totalPages}"></span>
+  <a th:href="@{/country/{id}(page=${cities.number + 1}, id=${country.getId()})}"
+     th:if="${cities.hasNext()}"><span>Next</span></a>
+</div>
+<footer th:replace="/layout::footer"></footer>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style th:replace="/layout :: css"></style>
+</head>
+<body>
+<h1>Create New City</h1>
+<form id="form" th:action="@{/country/edit/{id}(id=${country.getId()})}" method="post" th:object="${country}">
+    <label>CountryName:
+        <input type="text" th:field="*{countryName}" required>
+        <p th:if="${#fields.hasErrors('countryName')}" th:errors="*{countryName}"></p>
+    </label>
+    <label>Ensign:
+        <input type="file" th:field="*{file}" required>
+    </label><br>
+    <button type="submit">Update</button>
+</form>
+<a th:href="@{/country}">Back to home</a>
+<footer th:replace="/layout::footer"></footer>
+</body>
+</html>

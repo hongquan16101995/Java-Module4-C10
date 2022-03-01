@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style th:replace="/layout :: css"></style>
+</head>
+<body>
+<h1><a style="text-decoration: none" type="button" th:href="@{/country}"><span style="color: white">List Country</span></a></h1>
+<button><a th:href="@{/country/create}">Create new country</a></button><br><br>
+
+<table id="tables">
+    <tr>
+        <th>CountryName</th>
+        <th>Ensign</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    <tr th:each="c : ${countries}">
+        <td>
+            <a th:text="${c.getCountryName()}"
+               th:href="@{/country/{id}(id=${c.getId()})}"></a>
+        </td>
+        <td><img th:src="@{'/'+${c.getEnsignUrl()}}" alt="Lỗi"></td>
+        <td><a th:href="@{/country/edit/{id}(id=${c.getId()})}">Edit</a></td>
+        <td><a th:href="@{/country/delete/{id}(id=${c.getId()})}"
+               onclick="return confirm('Are you sure you want to delete this country?')">Delete</a></td>
+    </tr>
+</table>
+<a th:href="@{/city}">Back to home</a>
+<footer th:replace="/layout::footer"></footer>
+</body>
+</html>

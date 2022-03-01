@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style th:replace="/layout :: css"></style>
+</head>
+<body>
+<h1>Update City</h1>
+<form id="form" th:action="@{/city/edit/{id}(id=${city.getId()})}" method="post" th:object="${city}">
+    <label>CityName:
+        <input type="text" th:field="*{cityName}" required>
+        <p th:if="${#fields.hasErrors('cityName')}" th:errors="*{cityName}"></p>
+    </label>
+    <label>Popular:
+        <input type="text" th:field="*{popular}" required>
+        <p th:if="${#fields.hasErrors('popular')}" th:errors="*{popular}"></p>
+    </label>
+    <label>GDP:
+        <input type="text" th:field="*{gdp}" required>
+        <p th:if="${#fields.hasErrors('gdp')}" th:errors="*{gdp}"></p>
+    </label>
+    <label>Country:
+        <select th:field="*{country}">
+            <option th:each="c : ${countries}" th:value="${c.getId()}" th:text="${c.getCountryName()}"></option>
+        </select>
+    </label><br>
+    <button type="submit">Update</button>
+</form>
+<a th:href="@{/city}">Back to home</a>
+<footer th:replace="/layout::footer"></footer>
+</body>
+</html>
