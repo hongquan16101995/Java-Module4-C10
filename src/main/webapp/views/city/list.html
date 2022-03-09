@@ -6,9 +6,10 @@
     <style th:replace="/layout :: css"></style>
 </head>
 <body>
-<h1><a style="text-decoration: none" type="button" th:href="@{/city}"><span style="color: white">List City</span></a></h1>
+<h1><a style="text-decoration: none" type="button" th:href="@{/city}"><span style="color: white" th:text="#{list.city.title}"></span></a></h1>
 <button><a th:href="@{/city/create}">Create new city</a></button><br><br>
 <button><a type="button" th:href="@{/country}">List Country</a></button><br><br>
+Language: <a href="?lang=en">English</a> | <a href="?lang=vn">Vn</a>
 
 <form th:action="@{/city}" method="get">
     <label>Search By Name:
